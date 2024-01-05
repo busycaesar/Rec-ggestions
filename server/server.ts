@@ -2,20 +2,19 @@ import express, { Application, Request, Response } from "express";
 import dotenv from "dotenv";
 dotenv.config();
 import { connect } from "./Data/mongoDB";
-import { registerNewUser } from "./Data/userDataQuery";
+import userAPIs from "./APIs/user";
 
 const app: Application = express();
 
+// Middleware
+
 app.use(express.json());
 
+app.use("/user", userAPIs);
+
+// Routes
 app.get("/", (request: Request, response: Response) => {
   response.send("DEv The DEV, DEveloping!");
-});
-
-app.post("/user", (request: Request, response: Response) => {
-  registerNewUser(request.body)
-    .then((message) => response.json(message))
-    .catch((error) => response.status(422).json({ Error: error }));
 });
 
 connect()

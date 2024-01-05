@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { getDBInstance } from "./mongoDB";
 
+// The interface for the user object which will be received from the client side.
 interface iUser {
   firstName: string;
   lastName: string;
@@ -42,5 +43,20 @@ export const registerNewUser = (newUserData: iUser): Promise<string> => {
         if (error.code == 11000) reject("Username is already taken!");
         reject(`There was an error creatring the user ${newUserData.userName}`);
       });
+  });
+};
+
+export const validateUser = (userData: iUser): Promise<iUser> => {
+  return new Promise<iUser>((resolve, reject) => {
+    getDB();
+    User.findOne({ userName: userData.userName })
+      .exec()
+      .then((user: iUser) => {
+        if (user.password == userData.password) resolve(user);
+        else reject(`Incorrect password for the user ${userData.userName}!`);
+      })
+      .catch((error: any) =>
+        reject(`Unable to find the user ${userData.userName}!`)
+      );
   });
 };
