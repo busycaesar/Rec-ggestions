@@ -7,7 +7,6 @@ interface iUser {
   lastName: string;
   userName: string;
   password: string;
-  password2: string;
 }
 
 let MongoDB_Schema = mongoose.Schema,
@@ -30,8 +29,6 @@ const getDB = () => {
 
 export const registerNewUser = (newUserData: iUser): Promise<string> => {
   return new Promise<string>((resolve, reject) => {
-    if (newUserData.password != newUserData.password2)
-      reject("Passwords doesn't match!");
     getDB();
     let newUser = User(newUserData);
     newUser

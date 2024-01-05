@@ -3,18 +3,20 @@ import dotenv from "dotenv";
 dotenv.config();
 import { connect } from "./Data/mongoDB";
 import userAPIs from "./APIs/user";
+import cors from "cors";
 
 const app: Application = express();
 
 // Middleware
 
 app.use(express.json());
+app.use(cors());
 
 app.use("/user", userAPIs);
 
 // Routes
 app.get("/", (request: Request, response: Response) => {
-  response.send("DEv The DEV, DEveloping!");
+  response.status(200).json({ message: "DEv The DEV, DEveloping!" });
 });
 
 connect()
