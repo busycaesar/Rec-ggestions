@@ -34,10 +34,11 @@ export const registerNewUser = (newUserData: iUser): Promise<string> => {
     newUser
       .save()
       .then(() =>
-        resolve(`${newUserData.userName} is successfully added to the DB!`)
+        resolve(`${newUserData.userName} is successfully registered!`)
       )
       .catch((error: any) => {
-        if (error.code == 11000) reject("Username is already taken!");
+        if (error.code == 11000)
+          reject(`${newUserData.userName} is already taken!`);
         reject(`There was an error creatring the user ${newUserData.userName}`);
       });
   });
