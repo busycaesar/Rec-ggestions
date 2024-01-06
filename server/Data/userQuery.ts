@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 
 // The interface for the user object which will be received from the client side.
 interface iUser {
+  _id: Number;
   firstName: string;
   lastName: string;
   userName: string;
@@ -60,18 +61,11 @@ export const validateUser = (userData: iUser): Promise<iUser> => {
     // Looking for the user from the DB using the userName received with the userData.
     User.findOne({ userName: userData.userName })
       .exec()
-      .then((user: iUser[]) => {
-        // The mongoDB sents back an array type of the users, even if there is only one document from the collection.
-        if (user.length == 0) reject(`Unable to find "${userData.userName}"!`);
-        else {
-          // Once the user is found, making sure that the password is the same as that of the user. Using bcrypt to compare the pain text received during the login and the hashed password store into the DB.
-          bcrypt
-            .compare(userData.password, user[0].password)
-            .then((response) => {
-              if (response) resolve(user[0]);
-              else reject(`Incorrect password for "${userData.userName}"!`);
-            });
-        }
+      .then((user: iUser) => {
+        bcrypt.compare(userData.password, user.password).then((response) => {
+          if (response) resolve(user);
+          else reject(`Incorrect password for "${userData.userName}"!`);
+        });
       })
       .catch(() => reject(`Unable to find "${userData.userName}"!`));
   });
