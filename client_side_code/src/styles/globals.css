@@ -1,0 +1,13 @@
+body {
+  background: linear-gradient(to right, #000, #005) !important;
+  color: white !important;
+}
+
+h1 {
+  margin: 0.5em 0 !important;
+}
+
+a {
+  color: blue !important;
+  cursor: pointer;
+}
