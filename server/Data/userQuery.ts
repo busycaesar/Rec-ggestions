@@ -39,7 +39,7 @@ export const registerNewUser = (newUserData: iUser): Promise<string> => {
       .catch((error: any) => {
         if (error.code == 11000)
           reject(`${newUserData.userName} is already taken!`);
-        reject(`There was an error creatring the user ${newUserData.userName}`);
+        reject(`There was an error creatring "${newUserData.userName}"`);
       });
   });
 };
@@ -51,10 +51,8 @@ export const validateUser = (userData: iUser): Promise<iUser> => {
       .exec()
       .then((user: iUser) => {
         if (user.password == userData.password) resolve(user);
-        else reject(`Incorrect password for the user ${userData.userName}!`);
+        else reject(`Incorrect password for "${userData.userName}"!`);
       })
-      .catch((error: any) =>
-        reject(`Unable to find the user ${userData.userName}!`)
-      );
+      .catch((error: any) => reject(`Unable to find "${userData.userName}"!`));
   });
 };
