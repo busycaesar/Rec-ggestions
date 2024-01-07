@@ -1,5 +1,6 @@
 import { fetchRequest } from "./fetchFunctions";
 import { NewUserData, ValidateUserData } from "@/Components";
+import { jwtDecode } from "jwt-decode";
 
 export const registerNewUser = async (newUserData: NewUserData) => {
   const body = {
@@ -37,6 +38,31 @@ export const validateNewUser = async (newUserData: ValidateUserData) => {
   } else throw new Error(data.message);
 };
 
+export const checkJWT = async () => {
+  const res = await fetch(
+      `${process.env.NEXT_PUBLIC_USER_API}/user/dashboard`,
+      {
+        method: "GET",
+        headers: {
+          "content-type": "application/json",
+          Authorization: `JWT ${getToken()}`,
+        },
+      }
+    ),
+    data = await res.json();
+  if (res.status === 200) {
+    return data.message;
+  } else throw new Error(data.message);
+};
+
 const setToken = (token: string) => {
   sessionStorage.setItem("access_token", token);
+};
+
+export const getToken = () => {
+  try {
+    return sessionStorage.getItem("access_token");
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
 };
