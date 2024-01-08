@@ -5,6 +5,14 @@ import passport, { jwtOptions } from "./jwt";
 
 const router = express.Router();
 
+router.get(
+  "/dashboard",
+  passport.authenticate("jwt", { session: false }),
+  (request: Request, response: Response) => {
+    response.json({ message: "Welcome to the user Dashboard!" });
+  }
+);
+
 router.post("/login", (request: Request, response: Response) => {
   validateUser(request.body)
     .then((user) => {
@@ -26,13 +34,5 @@ router.post("/register", (request: Request, response: Response) => {
     .then((message) => response.json({ message: message }))
     .catch((error) => response.status(422).json({ message: error }));
 });
-
-router.get(
-  "/dashboard",
-  passport.authenticate("jwt", { session: false }),
-  (request: Request, response: Response) => {
-    response.json("Dev the Dev!");
-  }
-);
 
 export default router;

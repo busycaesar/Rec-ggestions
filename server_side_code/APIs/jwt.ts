@@ -1,4 +1,3 @@
-import jwt from "jsonwebtoken";
 import passport from "passport";
 import passportJWT from "passport-jwt";
 
@@ -12,7 +11,6 @@ export let jwtOptions = {
 };
 
 let strategy = new JwtStrategy(jwtOptions, (jwt_payload, next) => {
-  console.log("payload received", jwt_payload);
   if (jwt_payload) {
     next(null, {
       _id: jwt_payload._id,
