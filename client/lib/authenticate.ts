@@ -59,10 +59,19 @@ const setToken = (token: string) => {
   sessionStorage.setItem("access_token", token);
 };
 
-export const getToken = () => {
+export const getToken = (): string => {
   try {
-    return sessionStorage.getItem("access_token");
+    return sessionStorage.getItem("access_token") || "";
   } catch (error: any) {
     throw new Error(error.message);
+  }
+};
+
+export const readToken = () => {
+  try {
+    const decodedToken = jwtDecode(getToken());
+    return decodedToken ? decodedToken : null;
+  } catch (error) {
+    return null;
   }
 };

@@ -11,3 +11,7 @@ a {
   color: blue !important;
   cursor: pointer;
 }
+
+.mainContent {
+  margin: 3em 2em;
+}

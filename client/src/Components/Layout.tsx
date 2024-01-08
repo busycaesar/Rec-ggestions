@@ -5,5 +5,5 @@ type Component = {
 };
 
 export default function Layout({ children }: Component) {
-  return <div style={{ marginTop: "3em" }}>{children}</div>;
+  return <div className="mainContent">{children}</div>;
 }
