@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { NewUserData } from "../Components/DataTypes";
 import { registerNewUser } from "../../lib/authenticate";
-import Authentication from "@/Components/authentication";
+import { Authentication } from "@/Components";
 
 export default function Register() {
   const { register, handleSubmit } = useForm({

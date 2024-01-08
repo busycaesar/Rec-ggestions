@@ -4,7 +4,7 @@ import { ValidateUserData } from "../Components/DataTypes";
 import { validateNewUser } from "../../lib/authenticate";
 import { checkJWT } from "../../lib/authenticate";
 import { useRouter } from "next/router";
-import Authentication from "@/Components/authentication";
+import { Authentication } from "@/Components";
 
 export default function Login() {
   const { register, handleSubmit } = useForm({

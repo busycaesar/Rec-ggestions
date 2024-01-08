@@ -1,18 +1,20 @@
 import React, { useEffect } from "react";
-import { readToken } from "../../lib/authenticate";
 import { useRouter } from "next/router";
+import { readToken } from "../../lib/authenticate";
+import { Button } from "react-bootstrap";
 
 export default function Dashboard() {
-  let token: any = readToken();
+  let authenticated: any = readToken();
   const router = useRouter();
   useEffect(() => {
-    if (!token) router.push("/authentication");
+    if (!authenticated) router.push("/login");
   });
-  if (!token) return null;
+  if (!authenticated) return null;
   return (
     <>
-      <h1>Dashboard</h1>
-      <p>Welcome back {token.userName}!</p>
+      <h1 className="page-title">Dashboard</h1>
+      <p>Welcome back {authenticated.userName}!</p>
+      <Button>Add Experience</Button>
     </>
   );
 }

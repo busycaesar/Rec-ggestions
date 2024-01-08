@@ -1,4 +1,3 @@
 export { default as Layout } from "./Layout";
-export { default as UserRegistrationForm } from "./UserRegistrationForm";
-export { default as UserValidationForm } from "./UserValidationForm";
+export { default as Authentication } from "./Authentication";
 export type { NewUserData, ValidateUserData } from "./DataTypes";

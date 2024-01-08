@@ -5,5 +5,9 @@ type Component = {
 };
 
 export default function Layout({ children }: Component) {
-  return <div className="mainContent">{children}</div>;
+  return (
+    <>
+      <div className="mainContent">{children}</div>
+    </>
+  );
 }
