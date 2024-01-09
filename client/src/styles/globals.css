@@ -1,10 +1,10 @@
 body {
-  background: linear-gradient(to right, #3c6e71, #171219) !important;
+  background: linear-gradient(to right, #13293d, #000) !important;
   color: white !important;
 }
 
 h1 {
-  margin: 0.5em 0 !important;
+  margin: 0.25em 0 !important;
 }
 
 a {
@@ -19,7 +19,6 @@ a {
 .page-title {
   font-size: 5em;
   text-align: center;
-  background: linear-gradient(to right, #d68fd6, #defff2);
-  -webkit-background-clip: text;
-  color: transparent;
+  color: white;
+  font-weight: bolder;
 }
