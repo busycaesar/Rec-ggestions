@@ -8,18 +8,14 @@ export default function Dashboard() {
   const router = useRouter();
   useEffect(() => {
     if (!authenticated) router.push("/login");
-    const addSheet = () => {
-      router.push("/addSheet");
-    };
   });
   if (!authenticated) return null;
   return (
     <>
-      <h1 className="page-title">Your Sheet Posts</h1>
+      <h1 className="page-title">CovGen!</h1>
       <p style={{ textAlign: "center", fontSize: "larger" }}>
         Welcome back {authenticated.userName}!
       </p>
-      <Button>Add Experience</Button>
     </>
   );
 }
